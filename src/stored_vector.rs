@@ -1,6 +1,4 @@
-
-
-use std::{collections::{HashMap, hash_map}, fs::Metadata};
+use std::collections::HashMap;
 #[derive(Debug)]
 pub struct StoredVector{
     id:String,
@@ -16,8 +14,7 @@ impl StoredVector {
             metadata
         }
     }
-    fn dimension(vector : &Vec<f32>)->usize{
-
+    pub fn dimension(vector : &Vec<f32>)->usize{
         vector.len()
     }
 }
