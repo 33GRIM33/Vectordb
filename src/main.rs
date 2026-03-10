@@ -1,5 +1,5 @@
-use Vector_Db::VectorDB;
-use std::collections::HashMap;
+use Vector_Db::{StoredVector, VectorDB};
+use std::{collections::HashMap, hash::Hash};
 
 fn main() {
     println!("=== VectorDB Phase 1 Testing ===\n");

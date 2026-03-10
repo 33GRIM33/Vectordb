@@ -1,4 +1,5 @@
 use std::{collections::HashMap};
+use crate::distance::DistanceMetric;
 use crate::stored_vector::StoredVector;
 pub struct VectorDB{
     storage : HashMap<String,StoredVector>
