@@ -1,6 +1,7 @@
 use std::{collections::HashMap};
 use crate::distance::DistanceMetric;
-use crate::stored_vector::StoredVector;
+use crate::stored_vector::{self, StoredVector};
+use crate::search_result::{self, SearchResult};
 pub struct VectorDB{
     storage : HashMap<String,StoredVector>,
     metric : Box<dyn DistanceMetric>
@@ -37,5 +38,15 @@ impl VectorDB {
         let v1 = self.get(id1)?;
         let v2 = self.get(id2)?;
         Some(self.metric.distance(v1.vector(), v2.vector()))
+    }
+    pub fn search(&self, query: &[f32], k: usize) -> Vec<SearchResult> {
+        let mut res:Vec<SearchResult> = Vec::new();
+        for(id,stored_vector) in &self.storage{
+            let dist = self.metric.distance(query, &stored_vector.vector());
+            res.push(SearchResult::new(id.clone(),dist));
+        }
+        res.sort_by(|a, b| a.distance().partial_cmp(&b.distance()).unwrap());
+        res.truncate(k);
+        res
     }
 }
