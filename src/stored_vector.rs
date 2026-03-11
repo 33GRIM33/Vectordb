@@ -17,4 +17,7 @@ impl StoredVector {
     pub fn dimension(&self)->usize{
         self.vector.len()
     }
+    pub fn vector(&self)->&Vec<f32>{
+        &self.vector
+    }
 }

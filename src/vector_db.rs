@@ -2,14 +2,16 @@ use std::{collections::HashMap};
 use crate::distance::DistanceMetric;
 use crate::stored_vector::StoredVector;
 pub struct VectorDB{
-    storage : HashMap<String,StoredVector>
+    storage : HashMap<String,StoredVector>,
+    metric : Box<dyn DistanceMetric>
 }
 
 impl VectorDB {
-    pub fn new()->Self{
+    pub fn new(metric:Box<dyn DistanceMetric>) -> Self {
         Self {
-             storage: HashMap::new() 
-            }
+            storage: HashMap::new(),
+            metric
+        }
     }
     pub fn insert(&mut self,id:String,vector : Vec<f32>,metadata:Option<HashMap<String, String>>){
         let v = StoredVector::new(id.clone(),vector,metadata);
@@ -30,5 +32,10 @@ impl VectorDB {
         .iter()
         .map(|(key, _)| key.clone())
         .collect()
+    }
+    pub fn calculate_distance(&self,id1:&str,id2:&str)->Option<f32>{
+        let v1 = self.get(id1)?;
+        let v2 = self.get(id2)?;
+        Some(self.metric.distance(v1.vector(), v2.vector()))
     }
 }

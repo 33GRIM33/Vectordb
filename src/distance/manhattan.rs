@@ -1,4 +1,3 @@
-use std::backtrace;
 
 use super::DistanceMetric;
 
