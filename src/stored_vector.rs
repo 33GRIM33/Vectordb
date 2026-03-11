@@ -17,6 +17,9 @@ impl StoredVector {
     pub fn dimension(&self)->usize{
         self.vector.len()
     }
+    pub fn metadata(&self)->&Option<HashMap<String,String>>{
+        &self.metadata
+    }
     pub fn vector(&self)->&Vec<f32>{
         &self.vector
     }

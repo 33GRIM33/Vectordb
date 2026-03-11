@@ -1,9 +1,5 @@
-
 use super::DistanceMetric;
-
 // Manhattan distance: sum(|a[i] - b[i]|)
-// Think: distance walking on a grid (can't go diagonal)
-
 pub struct Manhattan;
 
 impl DistanceMetric for Manhattan {

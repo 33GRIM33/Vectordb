@@ -2,12 +2,10 @@ use super::DistanceMetric;
 pub struct Cosine;
 
 impl Cosine {
-    // dot product
     fn dot_product(a: &[f32], b: &[f32]) -> f32 {
         a.iter().zip(b).map(|(x,y)|x*y).sum()
     }
     
-    //  magnitude 
     fn magnitude(v: &[f32]) -> f32 {
         v.iter().map(|x|x*x).sum::<f32>().sqrt()
     }
@@ -22,7 +20,6 @@ impl DistanceMetric for Cosine {
         }
         let c = dot / d;
         
-        // Cosine distance is 1 - similarity
         1.0 - c
     }
 }
